@@ -5,6 +5,7 @@ import com.ms.ticketlock.controller.response.ReservationResponse;
 import com.ms.ticketlock.enums.ReservationStatus;
 import com.ms.ticketlock.enums.TicketStatus;
 import com.ms.ticketlock.mapper.ReservationMapper;
+import com.ms.ticketlock.message.ReservationExpirationProducer;
 import com.ms.ticketlock.repository.ReservationRepository;
 import com.ms.ticketlock.repository.TicketRepository;
 import com.ms.ticketlock.repository.entity.ReservationEntity;
@@ -29,6 +30,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final TicketService ticketService;
     private final RedisLockService redisLockService;
+    private final ReservationExpirationProducer expirationProducer;
 
     @Transactional
     public ReservationResponse createReservation(ReservationRequest request) {
@@ -49,6 +51,7 @@ public class ReservationService {
 
             var reservation = mapper.toEntity(request, ticketUpdated, EXPIRATION_MINUTES);
             var saved = reservationRepository.saveAndFlush(reservation);
+            expirationProducer.scheduleExpiration(saved.getReservationId());
 
             return mapper.toResponse(saved);
         } finally {
