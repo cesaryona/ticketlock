@@ -33,9 +33,16 @@ dependencies {
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.flywaydb:flyway-database-postgresql'
 	implementation 'org.springframework.amqp:spring-rabbit-stream'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
 	compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.mapstruct:mapstruct-jdk8:1.5.5.Final'
+
 	runtimeOnly 'org.postgresql:postgresql'
+
 	annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'org.testcontainers:junit-jupiter'
