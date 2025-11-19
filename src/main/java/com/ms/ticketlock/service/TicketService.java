@@ -6,6 +6,7 @@ import com.ms.ticketlock.enums.TicketStatus;
 import com.ms.ticketlock.mapper.TicketMapper;
 import com.ms.ticketlock.repository.EventRepository;
 import com.ms.ticketlock.repository.TicketRepository;
+import com.ms.ticketlock.repository.entity.TicketEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,10 @@ public class TicketService {
     private final TicketMapper mapper;
     private final TicketRepository repository;
     private final EventRepository eventRepository;
+
+    public TicketEntity findById(UUID id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("ticket not found"));
+    }
 
     public Page<TicketResponse> getTicketsByEvent(UUID eventId, Integer page, Integer size, String orderBy) {
         Pageable pageable = getPageable(page, size, orderBy);
@@ -49,6 +54,10 @@ public class TicketService {
         return repository.saveAll(tickets).stream()
                 .map(mapper::toResponse)
                 .toList();
+    }
+
+    public TicketEntity save(TicketEntity ticketEntity) {
+        return repository.save(ticketEntity);
     }
 
     private Pageable getPageable(Integer page, Integer size, String orderBy) {
