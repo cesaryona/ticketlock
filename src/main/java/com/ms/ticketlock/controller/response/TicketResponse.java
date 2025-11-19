@@ -1,19 +1,17 @@
 package com.ms.ticketlock.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Builder;
+import com.ms.ticketlock.enums.TicketStatus;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Builder
-public record EventResponse(
+public record TicketResponse(
+        UUID ticketId,
         UUID eventId,
-        String name,
-        LocalDate date,
-        String local,
-        Long totalSeats,
+        String seatRow,
+        String seatNumber,
+        TicketStatus status,
 
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         LocalDateTime createdAt) {

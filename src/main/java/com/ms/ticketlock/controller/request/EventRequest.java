@@ -4,9 +4,11 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.Builder;
 
 import java.time.LocalDate;
 
+@Builder
 public record EventRequest(
         @NotBlank(message = "Name is required")
         String name,
