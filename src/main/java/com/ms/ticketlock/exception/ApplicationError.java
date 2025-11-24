@@ -13,7 +13,10 @@ public enum ApplicationError {
 
     RESERVATION_NOT_FOUND(HttpStatus.NOT_FOUND, "Reservation [%s] not found"),
     RESERVATION_NOT_PENDING(HttpStatus.BAD_REQUEST, "Reservation [%s] is not pending"),
-    RESERVATION_EXPIRED(HttpStatus.BAD_REQUEST, "Reservation [%s] has expired");
+    RESERVATION_EXPIRED(HttpStatus.BAD_REQUEST, "Reservation [%s] has expired"),
+
+    VALIDATION_ERROR(HttpStatus.BAD_REQUEST, "Validation error"),
+    INVALID_REQUEST(HttpStatus.BAD_REQUEST, "Invalid request parameters");
 
     private final HttpStatus status;
     private final String message;

@@ -1,7 +1,6 @@
 package com.ms.ticketlock.controller;
 
 import com.ms.ticketlock.controller.request.TicketBatchRequest;
-import com.ms.ticketlock.controller.request.TicketRequest;
 import com.ms.ticketlock.controller.response.TicketResponse;
 import com.ms.ticketlock.service.TicketService;
 import jakarta.validation.Valid;
